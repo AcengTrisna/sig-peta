@@ -11,74 +11,133 @@
       crossorigin=""
     />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <div class="container">
       <aside class="sidebar">
         <h1 class="app-title">SIG.stmik-dci.ac.id</h1>
 
-        <section class="map-controls">
-          <h2>Ketika nama tempat:</h2>
-          <div class="form-group">
-            <label for="map-type">Ganti Jenis Peta</label>
-            <select id="map-type">
-              <option value="roadmap">Peta Roadmap</option>
-            </select>
+        <section class="login-area" id="login-section">
+          <h2>Login Pengguna</h2>
+          <div id="login-form-container">
+            <div class="form-group">
+              <label for="username">Nama Pengguna</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Masukkan nama pengguna"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Kata Sandi</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Masukkan kata sandi"
+              />
+            </div>
+            <button id="login-btn" class="btn primary">Masuk</button>
           </div>
-          <div class="form-group">
-            <label for="coord-x">Koordinat X</label>
-            <input type="text" id="coord-x" placeholder="Enter X coordinate" />
-          </div>
-          <div class="form-group">
-            <label for="coord-y">Koordinat Y</label>
-            <input type="text" id="coord-y" placeholder="Enter Y coordinate" />
-          </div>
-          <div class="form-group">
-            <label for="location-name">Nama Lokasi</label>
-            <input
-              type="text"
-              id="location-name"
-              placeholder="Enter location name"
-            />
-          </div>
-          <div class="button-group">
-            <button id="save-coords-btn" class="btn primary">Simpan</button>
-            <button id="initial-coords-btn" class="btn secondary">
-              Koordinat Awal
-            </button>
+          <div id="logged-in-status" style="display: none">
+            <p>Selamat datang, <strong id="logged-in-username"></strong>!</p>
+            <button id="logout-btn" class="btn secondary">Keluar</button>
           </div>
         </section>
 
-        <section class="status-area">
-          <h2>Status</h2>
-          <ul id="status-list">
-            <li><span class="status-indicator success"></span> Sistem Agus</li>
-            <li><span class="status-indicator error"></span> Baterai Rendah</li>
-            <li>
-              <span class="status-indicator warning"></span> Perlu Pembaruan
-            </li>
-            <li><span class="status-indicator info"></span> Koneksi Stabil</li>
-            <li><span class="status-indicator success"></span> GPS Aktif</li>
-            <li><span class="status-indicator info"></span> Data Terkini</li>
-            <li><span class="status-indicator error"></span> Memori Penuh</li>
-            <li>
-              <span class="status-indicator warning"></span> Server Lambat
-            </li>
-          </ul>
-        </section>
+        <div id="app-content" style="display: none">
+          <section class="map-controls">
+            <h2>Kontrol Peta</h2>
+            <div class="form-group">
+              <label for="map-type">Ganti Jenis Peta</label>
+              <select id="map-type">
+                <option value="OpenStreetMap.Mapnik" selected>
+                  OpenStreetMap
+                </option>
+                <option value="Esri.WorldImagery">
+                  Esri World Imagery (Satelit)
+                </option>
+                <option value="Esri.WorldStreetMap">
+                  Esri World Street Map
+                </option>
+                <option value="OpenTopoMap">OpenTopoMap</option>
+                <option value="Stadia.AlidadeSmoothDark">
+                  Stadia Dark Mode
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="coord-x">Koordinat X (Lintang)</label>
+              <input
+                type="text"
+                id="coord-x"
+                placeholder="Klik peta atau isi manual"
+              />
+            </div>
+            <div class="form-group">
+              <label for="coord-y">Koordinat Y (Bujur)</label>
+              <input
+                type="text"
+                id="coord-y"
+                placeholder="Klik peta atau isi manual"
+              />
+            </div>
+            <div class="form-group">
+              <label for="location-name">Nama Lokasi</label>
+              <input
+                type="text"
+                id="location-name"
+                placeholder="Masukkan nama lokasi"
+              />
+            </div>
+            <div class="button-group">
+              <button id="save-coords-btn" class="btn primary">
+                Simpan Lokasi
+              </button>
+              <button id="initial-coords-btn" class="btn secondary">
+                Reset Koordinat
+              </button>
+            </div>
+          </section>
 
-        <section class="login-area">
-          <h2>Login</h2>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter username" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter password" />
-          </div>
-          <button id="login-btn" class="btn primary">OK</button>
-        </section>
+          <section class="overlay-controls">
+            <h2>Hamparan Peta</h2>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="example-overlay-toggle" />
+              <label for="example-overlay-toggle">Contoh Area Penting</label>
+            </div>
+          </section>
+
+          <section class="saved-locations-area">
+            <h2>Lokasi Tersimpan</h2>
+            <ul id="saved-locations-list"></ul>
+          </section>
+
+          <section class="status-area">
+            <h2>Status Sistem</h2>
+            <ul id="status-list">
+              <li>
+                <span class="status-indicator success"></span> Sistem Berjalan
+                Normal
+              </li>
+              <li>
+                <span class="status-indicator error"></span> Periksa Koneksi
+                Internet
+              </li>
+              <li>
+                <span class="status-indicator warning"></span> Perlu Pembaruan
+                Aplikasi
+              </li>
+              <li><span class="status-indicator info"></span> GPS Aktif</li>
+              <li>
+                <span class="status-indicator success"></span> Data Terbaru
+              </li>
+            </ul>
+          </section>
+        </div>
       </aside>
 
       <main class="map-container">
