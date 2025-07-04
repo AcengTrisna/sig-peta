@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIS Application</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQSi7kAteVNSLkmGwBcJtHpQvaNNQEg="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1 class="app-title">SIG.stmik-dci.ac.id</h1>
+
+        <section class="map-controls">
+          <h2>Ketika nama tempat:</h2>
+          <div class="form-group">
+            <label for="map-type">Ganti Jenis Peta</label>
+            <select id="map-type">
+              <option value="roadmap">Peta Roadmap</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="coord-x">Koordinat X</label>
+            <input type="text" id="coord-x" placeholder="Enter X coordinate" />
+          </div>
+          <div class="form-group">
+            <label for="coord-y">Koordinat Y</label>
+            <input type="text" id="coord-y" placeholder="Enter Y coordinate" />
+          </div>
+          <div class="form-group">
+            <label for="location-name">Nama Lokasi</label>
+            <input
+              type="text"
+              id="location-name"
+              placeholder="Enter location name"
+            />
+          </div>
+          <div class="button-group">
+            <button id="save-coords-btn" class="btn primary">Simpan</button>
+            <button id="initial-coords-btn" class="btn secondary">
+              Koordinat Awal
+            </button>
+          </div>
+        </section>
+
+        <section class="status-area">
+          <h2>Status</h2>
+          <ul id="status-list">
+            <li><span class="status-indicator success"></span> Sistem Agus</li>
+            <li><span class="status-indicator error"></span> Baterai Rendah</li>
+            <li>
+              <span class="status-indicator warning"></span> Perlu Pembaruan
+            </li>
+            <li><span class="status-indicator info"></span> Koneksi Stabil</li>
+            <li><span class="status-indicator success"></span> GPS Aktif</li>
+            <li><span class="status-indicator info"></span> Data Terkini</li>
+            <li><span class="status-indicator error"></span> Memori Penuh</li>
+            <li>
+              <span class="status-indicator warning"></span> Server Lambat
+            </li>
+          </ul>
+        </section>
+
+        <section class="login-area">
+          <h2>Login</h2>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password" />
+          </div>
+          <button id="login-btn" class="btn primary">OK</button>
+        </section>
+      </aside>
+
+      <main class="map-container">
+        <div id="map"></div>
+      </main>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20n6FLzFVgLqn0yD0q7M/y7R/tSgD/sY/I/4B4sM1P8="
+      crossorigin=""
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
